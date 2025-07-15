@@ -1,0 +1,62 @@
+[gd_scene load_steps=12 format=3 uid="uid://ciuijrmcw8auu"]
+
+[ext_resource type="Script" path="res://scenes/runner/chunk_controller.gd" id="1_qrxfx"]
+[ext_resource type="PackedScene" uid="uid://drl1cosuclgml" path="res://scenes/Chunks/chunk_1.tscn" id="2_n5fk7"]
+[ext_resource type="PackedScene" uid="uid://dwnfw2p5ooy11" path="res://scenes/player/player.tscn" id="2_n06xk"]
+[ext_resource type="PackedScene" uid="uid://bqf25f2sg6485" path="res://scenes/Chunks/chunk_4.tscn" id="3_35opf"]
+[ext_resource type="PackedScene" uid="uid://cbmhrbf0e0fbb" path="res://scenes/Chunks/chunk_3.tscn" id="4_g7fb5"]
+[ext_resource type="PackedScene" uid="uid://cjqwk50p47cqf" path="res://scenes/Blackhole/blackhole.tscn" id="5_gv8e4"]
+[ext_resource type="PackedScene" uid="uid://c4g83emtpe0pw" path="res://scenes/scoreboard/score_board.tscn" id="7_jme18"]
+[ext_resource type="AudioStream" uid="uid://bje1384g5amux" path="res://scenes/runner/FleeTrumpet.mp3" id="8_pselr"]
+[ext_resource type="Texture2D" uid="uid://b8uut5wtpgrq" path="res://art/paralax/paralax_layer1.png" id="10_cw577"]
+[ext_resource type="Texture2D" uid="uid://brtplix32xwb7" path="res://art/paralax/paralax_layer2.png" id="10_u24ij"]
+[ext_resource type="Texture2D" uid="uid://cf2w0125if4mi" path="res://art/paralax/paralax_layer3.png" id="11_rgi3w"]
+
+[node name="RunnerScene" type="Node2D"]
+script = ExtResource("1_qrxfx")
+chunk_scenes = Array[PackedScene]([ExtResource("2_n5fk7"), ExtResource("4_g7fb5"), ExtResource("3_35opf")])
+
+[node name="blackhole" parent="." node_paths=PackedStringArray("player", "audio") instance=ExtResource("5_gv8e4")]
+player = NodePath("../Player")
+audio = NodePath("../AudioStreamPlayer")
+
+[node name="Player" parent="." instance=ExtResource("2_n06xk")]
+position = Vector2(112, 132)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(160, 90)
+
+[node name="ScoreBoard" parent="Camera2D" instance=ExtResource("7_jme18")]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Camera2D"]
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/ParallaxBackground/ParallaxLayer2"]
+position = Vector2(161, 89)
+texture = ExtResource("10_u24ij")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
+motion_scale = Vector2(0.35, 0.35)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/ParallaxBackground/ParallaxLayer3"]
+position = Vector2(161, 89)
+texture = ExtResource("11_rgi3w")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/ParallaxBackground/ParallaxLayer"]
+position = Vector2(145, 89)
+texture = ExtResource("10_cw577")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_pselr")
+volume_db = -3.0
+autoplay = true
+
+[node name="Start_dist_node" type="Node2D" parent="."]

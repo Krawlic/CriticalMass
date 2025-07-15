@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://cm3y52gm14lex"]
+
+[ext_resource type="Texture2D" uid="uid://d20f8g4bmeyt5" path="res://art/entities/Cat.png" id="1_m8748"]
+[ext_resource type="Script" path="res://scenes/Blu/Blu_Manager.gd" id="2_dxrty"]
+[ext_resource type="FontFile" uid="uid://dhu6p0jpsi3w5" path="res://scenes/UI/retro-blocky.otf" id="3_gatvn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27c7k"]
+atlas = ExtResource("1_m8748")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tn2wk"]
+atlas = ExtResource("1_m8748")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbf4p"]
+atlas = ExtResource("1_m8748")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4rdg"]
+atlas = ExtResource("1_m8748")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3u215"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27c7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tn2wk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wbf4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4rdg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mlwnc"]
+radius = 16.0
+
+[node name="Blu" type="Node2D"]
+script = ExtResource("2_dxrty")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3u215")
+animation = &"idle"
+
+[node name="interact_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interact_area"]
+position = Vector2(-4, 0)
+shape = SubResource("CircleShape2D_mlwnc")
+
+[node name="speech" type="Label" parent="."]
+offset_left = -38.0
+offset_top = -56.0
+offset_right = 61.0
+offset_bottom = -7.0
+theme_override_fonts/font = ExtResource("3_gatvn")
+theme_override_font_sizes/font_size = 5
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2
+
+[connection signal="body_entered" from="interact_area" to="." method="_on_interact_area_body_entered"]
+[connection signal="body_exited" from="interact_area" to="." method="_on_interact_area_body_exited"]

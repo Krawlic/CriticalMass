@@ -1,0 +1,163 @@
+[gd_scene load_steps=19 format=3 uid="uid://bcwbspme4byro"]
+
+[ext_resource type="Script" path="res://scenes/UpgradeRoom/upgrade_room.gd" id="1_a3lrw"]
+[ext_resource type="Texture2D" uid="uid://bb3q5e3uikyjl" path="res://art/tilesets/lab.png" id="1_lx40s"]
+[ext_resource type="PackedScene" uid="uid://dwnfw2p5ooy11" path="res://scenes/player/player.tscn" id="2_70sh8"]
+[ext_resource type="PackedScene" uid="uid://c4g83emtpe0pw" path="res://scenes/scoreboard/score_board.tscn" id="4_f65b4"]
+[ext_resource type="PackedScene" uid="uid://bvqb2aelbonno" path="res://scenes/UpgradeRoom/upgrades/coyote_time.tscn" id="6_jmuvu"]
+[ext_resource type="PackedScene" uid="uid://wnpknfjlatbd" path="res://scenes/UpgradeRoom/upgrades/double_jump.tscn" id="7_mdr8g"]
+[ext_resource type="PackedScene" uid="uid://3ikj3kq62mmv" path="res://scenes/UpgradeRoom/exit_node.tscn" id="7_thdk2"]
+[ext_resource type="AudioStream" uid="uid://c47sqput3jjme" path="res://scenes/UpgradeRoom/the-inbetween.mp3" id="8_3cu4y"]
+[ext_resource type="PackedScene" uid="uid://cm3y52gm14lex" path="res://scenes/Blu/blu.tscn" id="9_usq3g"]
+
+[sub_resource type="Gradient" id="Gradient_t2u7o"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_51i4j"]
+gradient = SubResource("Gradient_t2u7o")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5tocj"]
+texture = ExtResource("1_lx40s")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -3, -8, -3)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -3, -8, -3)
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -3, -8, -3)
+0:7/0 = 0
+0:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:7/0/physics_layer_0/angular_velocity = 0.0
+1:7/0 = 0
+1:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:7/0/physics_layer_0/angular_velocity = 0.0
+2:7/0 = 0
+2:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:7/0/physics_layer_0/angular_velocity = 0.0
+7:0/0 = 0
+7:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+7:0/0/physics_layer_0/angular_velocity = 0.0
+7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(2, -8, 8, -8, 8, 8, 2, 8)
+7:1/0 = 0
+7:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+7:1/0/physics_layer_0/angular_velocity = 0.0
+7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(2, -8, 8, -8, 8, 8, 2, 8)
+7:2/0 = 0
+7:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+7:2/0/physics_layer_0/angular_velocity = 0.0
+7:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(2, -8, 8, -8, 8, 8, 2, 8)
+6:0/0 = 0
+6:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+6:0/0/physics_layer_0/angular_velocity = 0.0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(2, -8, 8, -8, 8, 8, 2, 8)
+7:3/0 = 0
+7:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+7:3/0/physics_layer_0/angular_velocity = 0.0
+7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(2, -8, 2, -2, 8, -2, 8, -8)
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -2, -8, -2)
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -2, -8, -2)
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -2, -8, -2)
+3:7/0 = 0
+3:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:7/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_8xqu6"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_5tocj")
+
+[sub_resource type="Curve" id="Curve_00c71"]
+_data = [Vector2(0.0733333, 0), 0.0, 0.0, 0, 0, Vector2(0.76, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_x0aoq"]
+curve = SubResource("Curve_00c71")
+
+[sub_resource type="Curve" id="Curve_ek3pv"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_y5sfh"]
+curve = SubResource("Curve_ek3pv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3sxrm"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 1, 0)
+spread = 180.0
+initial_velocity_min = 11.24
+initial_velocity_max = 376.41
+gravity = Vector3(0, 0, 0)
+damping_min = 80.899
+damping_max = 80.899
+scale_min = 0.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_y5sfh")
+alpha_curve = SubResource("CurveTexture_x0aoq")
+
+[node name="upgrade_room" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_a3lrw")
+player = NodePath("Player")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -3
+offset_left = -716.0
+offset_top = -372.0
+offset_right = 986.0
+offset_bottom = 605.0
+texture = SubResource("GradientTexture1D_51i4j")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_8xqu6")
+format = 2
+layer_0/name = "background"
+layer_0/z_index = -2
+layer_0/tile_data = PackedInt32Array(1, 131072, 7, 65537, 131072, 7, 131073, 131072, 7, 196609, 131072, 7, 262145, 131072, 7, 327681, 131072, 7, 393217, 131072, 7, 458753, 131072, 7, 524289, 131072, 7, 2, 131072, 7, 65538, 131072, 7, 131074, 131072, 7, 196610, 131072, 7, 262146, 131072, 7, 327682, 131072, 7, 393218, 131072, 7, 458754, 131072, 7, 524290, 131072, 7, 3, 131072, 7, 65539, 131072, 7, 131075, 131072, 7, 196611, 131072, 7, 262147, 131072, 7, 327683, 131072, 7, 393219, 131072, 7, 458755, 131072, 7, 524291, 131072, 7, 4, 131072, 7, 65540, 131072, 7, 131076, 131072, 7, 196612, 131072, 7, 262148, 131072, 7, 327684, 131072, 7, 393220, 131072, 7, 458756, 131072, 7, 524292, 131072, 7, 5, 131072, 7, 65541, 131072, 7, 131077, 131072, 7, 196613, 131072, 7, 262149, 131072, 7, 327685, 131072, 7, 393221, 131072, 7, 458757, 131072, 7, 524293, 131072, 7, 6, 131072, 7, 65542, 131072, 7, 131078, 131072, 7, 196614, 131072, 7, 262150, 131072, 7, 327686, 131072, 7, 393222, 131072, 7, 458758, 131072, 7, 524294, 131072, 7, 7, 131072, 7, 65543, 131072, 7, 131079, 131072, 7, 196615, 131072, 7, 262151, 131072, 7, 327687, 131072, 7, 393223, 131072, 7, 458759, 131072, 7, 524295, 131072, 7, 8, 131072, 7, 65544, 131072, 7, 131080, 131072, 7, 196616, 131072, 7, 262152, 131072, 7, 327688, 131072, 7, 393224, 131072, 7, 458760, 131072, 7, 524296, 131072, 7, 9, 131072, 7, 65545, 131072, 7, 131081, 131072, 7, 196617, 131072, 7, 262153, 131072, 7, 327689, 131072, 7, 393225, 131072, 7, 458761, 131072, 7, 524297, 131072, 7, 10, 131072, 7, 65546, 131072, 7, 131082, 131072, 7, 196618, 131072, 7, 262154, 131072, 7, 327690, 131072, 7, 393226, 131072, 7, 458762, 131072, 7, 524298, 131072, 7, 11, 131072, 7, 65547, 131072, 7, 131083, 131072, 7, 196619, 131072, 7, 262155, 131072, 7, 327691, 131072, 7, 393227, 131072, 7, 458763, 131072, 7, 524299, 131072, 7, 12, 131072, 7, 65548, 131072, 7, 131084, 131072, 7, 196620, 131072, 7, 262156, 131072, 7, 327692, 131072, 7, 393228, 131072, 7, 458764, 131072, 7, 524300, 131072, 7, 13, 131072, 7, 65549, 131072, 7, 131085, 131072, 7, 196621, 131072, 7, 262157, 131072, 7, 327693, 131072, 7, 393229, 131072, 7, 458765, 131072, 7, 524301, 131072, 7, 14, 131072, 7, 65550, 131072, 7, 131086, 131072, 7, 196622, 131072, 7, 262158, 131072, 7, 327694, 131072, 7, 393230, 131072, 7, 458766, 131072, 7, 524302, 131072, 7, 15, 131072, 7, 65551, 131072, 7, 131087, 131072, 7, 196623, 131072, 7, 262159, 131072, 7, 327695, 131072, 7, 393231, 131072, 7, 458767, 131072, 7, 524303, 131072, 7, 16, 131072, 7, 65552, 131072, 7, 131088, 131072, 7, 196624, 131072, 7, 262160, 131072, 7, 327696, 131072, 7, 393232, 131072, 7, 458768, 131072, 7, 524304, 131072, 7, 17, 131072, 7, 65553, 131072, 7, 131089, 131072, 7, 196625, 131072, 7, 262161, 131072, 7, 327697, 131072, 7, 393233, 131072, 7, 458769, 131072, 7, 524305, 131072, 7, 18, 131072, 7, 65554, 131072, 7, 131090, 131072, 7, 196626, 131072, 7, 262162, 131072, 7, 327698, 131072, 7, 393234, 131072, 7, 458770, 131072, 7, 524306, 131072, 7)
+layer_1/name = "foreground"
+layer_1/z_index = -1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "ground"
+layer_2/tile_data = PackedInt32Array(589824, 458752, 3, 589825, 0, 0, 589826, 0, 0, 589827, 131072, 0, 589828, 131072, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 131072, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 131072, 0, 589837, 65536, 0, 589838, 0, 0, 589839, 0, 0, 589840, 0, 0, 589841, 0, 0, 589842, 0, 0, 589843, 458752, 268435459, 524288, 458752, 0, 458752, 458752, 0, 393216, 458752, 1, 327680, 458752, 0, 262144, 458752, 0, 196608, 458752, 0, 131072, 458752, 0, 65536, 458752, 2, 0, 393216, 0, 524307, 458752, 268435458, 458771, 458752, 268435456, 393235, 458752, 268435457, 327699, 458752, 268435456, 262163, 458752, 268435456, 196627, 458752, 268435456, 131091, 458752, 268435458, 65555, 458752, 268435456, 19, 393216, 268435456, 1, 0, 1, 2, 131072, 1, 3, 0, 1, 4, 0, 1, 5, 65536, 1, 6, 0, 1, 7, 65536, 1, 8, 0, 1, 9, 131072, 1, 10, 0, 1, 11, 0, 1, 12, 65536, 1, 13, 0, 1, 14, 131072, 1, 15, 0, 1, 16, 0, 1, 17, 0, 1, 18, 0, 1)
+
+[node name="Player" parent="." instance=ExtResource("2_70sh8")]
+position = Vector2(27, 134)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(100, 74)
+
+[node name="ScoreBoard" parent="Camera2D" instance=ExtResource("4_f65b4")]
+
+[node name="voidparticles" type="GPUParticles2D" parent="."]
+z_index = -3
+position = Vector2(162, 83)
+amount = 128
+process_material = SubResource("ParticleProcessMaterial_3sxrm")
+lifetime = 2.0
+
+[node name="coyote_time" parent="." instance=ExtResource("6_jmuvu")]
+position = Vector2(189, 136)
+
+[node name="exit_node" parent="." instance=ExtResource("7_thdk2")]
+position = Vector2(284, 135)
+
+[node name="upgrade_base" parent="." instance=ExtResource("7_mdr8g")]
+position = Vector2(127, 136)
+
+[node name="bgmusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_3cu4y")
+autoplay = true
+
+[node name="Blu" parent="." instance=ExtResource("9_usq3g")]
+position = Vector2(57, 136)

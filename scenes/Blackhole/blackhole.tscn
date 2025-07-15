@@ -1,0 +1,115 @@
+[gd_scene load_steps=15 format=3 uid="uid://cjqwk50p47cqf"]
+
+[ext_resource type="Texture2D" uid="uid://b07ii4qfi0p77" path="res://art/entities/blackhole.png" id="1_4teui"]
+[ext_resource type="Script" path="res://scenes/runner/blackhole.gd" id="2_m1if1"]
+[ext_resource type="AudioStream" uid="uid://dj7nm7be7oxbq" path="res://scenes/Blackhole/drone-slow-surging-growling-background-368755.mp3" id="3_eoahr"]
+[ext_resource type="AudioStream" uid="uid://cxc0bapawl44c" path="res://scenes/Blackhole/portal_idle-34022.mp3" id="4_xhc06"]
+[ext_resource type="AudioStream" uid="uid://bdcwio7r3f2k8" path="res://scenes/Blackhole/inswijm-isolated-then-stretched-23711.mp3" id="5_n70qj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8exx"]
+atlas = ExtResource("1_4teui")
+region = Rect2(0, 0, 64, 360)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n4sjo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8exx")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="Curve" id="Curve_mun0j"]
+_data = [Vector2(0.0733333, 0), 0.0, 0.0, 0, 0, Vector2(0.76, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8amfd"]
+curve = SubResource("Curve_mun0j")
+
+[sub_resource type="Curve" id="Curve_fvt05"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ycq1j"]
+curve = SubResource("Curve_fvt05")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jn86t"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 80, 1)
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 20.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 0, 0)
+damping_min = 80.899
+damping_max = 80.899
+scale_min = 0.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_ycq1j")
+alpha_curve = SubResource("CurveTexture_8amfd")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdygk"]
+size = Vector2(1.7037, 360)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ftxur"]
+size = Vector2(66.963, 360)
+
+[node name="blackhole" type="AnimatedSprite2D"]
+z_index = 2
+position = Vector2(-98, 180)
+scale = Vector2(5.0625, 1)
+sprite_frames = SubResource("SpriteFrames_n4sjo")
+script = ExtResource("2_m1if1")
+
+[node name="voidparticles" type="GPUParticles2D" parent="."]
+position = Vector2(119.704, 99)
+amount = 128
+process_material = SubResource("ParticleProcessMaterial_jn86t")
+lifetime = 2.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_eoahr")
+volume_db = 4.0
+autoplay = true
+max_distance = 800.0
+attenuation = 2.63902
+max_polyphony = 3
+
+[node name="PortalProx" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(31.6049, -1)
+stream = ExtResource("4_xhc06")
+volume_db = 5.0
+autoplay = true
+max_distance = 250.0
+attenuation = 2.92817
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(31.8025, -1)
+stream = ExtResource("5_n70qj")
+autoplay = true
+max_distance = 250.0
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(32.7284, -1)
+shape = SubResource("RectangleShape2D_fdygk")
+
+[node name="duckbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="duckbox"]
+position = Vector2(67.0617, -1)
+shape = SubResource("RectangleShape2D_ftxur")
+
+[node name="end_point" type="Node2D" parent="duckbox"]
+position = Vector2(33.5802, 0)
+
+[node name="start_point" type="Node2D" parent="duckbox"]
+position = Vector2(100.543, -1)
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="duckbox" to="." method="_on_duckbox_body_entered"]
+[connection signal="body_exited" from="duckbox" to="." method="_on_duckbox_body_exited"]

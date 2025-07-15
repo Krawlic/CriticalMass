@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://wnpknfjlatbd"]
+
+[ext_resource type="PackedScene" uid="uid://btg6o4ijr2866" path="res://scenes/UpgradeRoom/upgrades/upgrade_base.tscn" id="1_wsh0t"]
+[ext_resource type="Script" path="res://scenes/UpgradeRoom/upgrades/double_jump.gd" id="2_7swa3"]
+[ext_resource type="Texture2D" uid="uid://dnw4y2relr46k" path="res://art/upgrades/upgrade_icon_atlas.tres" id="3_cbjh2"]
+
+[node name="double_jump" instance=ExtResource("1_wsh0t")]
+script = ExtResource("2_7swa3")
+icon = ExtResource("3_cbjh2")
