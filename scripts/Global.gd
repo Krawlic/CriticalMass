@@ -2,6 +2,7 @@ extends Node
 
 var atomic_mass = 10
 var max_distance = 0
+var blackhole_acceleration = .05
 
 func _ready():
 	SignalBus.add_to_score.connect(_add_to_score)

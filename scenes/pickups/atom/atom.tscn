@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://hy7jyuftvgij"]
+[gd_scene load_steps=10 format=3 uid="uid://hy7jyuftvgij"]
 
 [ext_resource type="Texture2D" uid="uid://mdkolcnsclrl" path="res://scenes/pickups/atom/atom.png" id="1_ejgpn"]
 [ext_resource type="Script" path="res://scenes/pickups/atom/atom.gd" id="1_r33lc"]
+[ext_resource type="AudioStream" uid="uid://d4aianwxqrfov" path="res://scenes/pickups/atom/powerUp(2).wav" id="3_3toqc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q0u20"]
 atlas = ExtResource("1_ejgpn")
@@ -54,5 +55,8 @@ frame_progress = 0.505371
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pickup_area"]
 shape = SubResource("CircleShape2D_bwua0")
+
+[node name="get_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3toqc")
 
 [connection signal="body_entered" from="pickup_area" to="." method="_on_pickup_area_body_entered"]

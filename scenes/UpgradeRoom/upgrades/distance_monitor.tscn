@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://cojfb3limlbrt"]
+
+[ext_resource type="Script" path="res://distance_monitor.gd" id="1_gcihr"]
+[ext_resource type="Texture2D" uid="uid://i3c622h42gjr" path="res://scenes/UpgradeRoom/distance_monitor.png" id="2_3nqbl"]
+[ext_resource type="FontFile" uid="uid://dhu6p0jpsi3w5" path="res://scenes/UI/retro-blocky.otf" id="3_xks86"]
+
+[node name="distance_monitor" type="Node2D"]
+script = ExtResource("1_gcihr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_3nqbl")
+
+[node name="switch_monitor" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="max_distance_label" type="Label" parent="."]
+offset_left = -27.0
+offset_top = -4.0
+offset_right = 27.0
+offset_bottom = 5.0
+theme_override_fonts/font = ExtResource("3_xks86")
+theme_override_font_sizes/font_size = 5
+text = "1000000m"
+horizontal_alignment = 1
+
+[node name="monitor_label" type="Label" parent="."]
+visible = false
+offset_left = -27.0
+offset_top = -4.0
+offset_right = 27.0
+offset_bottom = 5.0
+theme_override_fonts/font = ExtResource("3_xks86")
+theme_override_font_sizes/font_size = 5
+text = "  MAX-DISTANCE"
+horizontal_alignment = 1
+
+[connection signal="timeout" from="switch_monitor" to="." method="_on_switch_monitor_timeout"]

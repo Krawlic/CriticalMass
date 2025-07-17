@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnl52cuobrdvb"]
+
+[ext_resource type="PackedScene" uid="uid://btg6o4ijr2866" path="res://scenes/UpgradeRoom/upgrades/upgrade_base.tscn" id="1_gjkfd"]
+[ext_resource type="Script" path="res://scenes/UpgradeRoom/upgrades/slide.gd" id="2_i5syf"]
+[ext_resource type="Texture2D" uid="uid://barvim1vkpgxk" path="res://art/upgrades/upgrade_icon_atlas.png" id="3_1vomt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0ma7"]
+atlas = ExtResource("3_1vomt")
+region = Rect2(0, 16, 16, 16)
+
+[node name="slide" instance=ExtResource("1_gjkfd")]
+script = ExtResource("2_i5syf")
+description = "Crouch Slide"
+icon = SubResource("AtlasTexture_e0ma7")

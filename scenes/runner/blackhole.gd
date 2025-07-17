@@ -13,6 +13,7 @@ var player_in_duckbox: bool = false
 
 func _ready():
 	curr_speed = start_speed
+	acceleration = Global.blackhole_acceleration
 
 func _process(delta):
 	position.x += curr_speed * delta

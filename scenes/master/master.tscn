@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqs4lgq7222a"]
+[gd_scene load_steps=3 format=3 uid="uid://cqs4lgq7222a"]
 
 [ext_resource type="Script" path="res://scenes/master/master.gd" id="1_sqm87"]
+[ext_resource type="PackedScene" uid="uid://dyflmw2vqgn78" path="res://scenes/Transition/transition.tscn" id="2_d5ixf"]
 
 [node name="Master" type="Node2D"]
 script = ExtResource("1_sqm87")
+
+[node name="transition" parent="." instance=ExtResource("2_d5ixf")]
+z_index = 5

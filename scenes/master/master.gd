@@ -12,11 +12,11 @@ func _ready():
 func _progress_scene(progress: String):
 	match progress:
 		"Runner":
-			get_tree().get_root().get_node("Master").get_child(0).queue_free()
+			get_tree().get_root().get_node("Master").get_child(1).queue_free()
 			var level_tmp = RUNNER_SCENE.instantiate()
 			self.call_deferred("add_child", level_tmp)
 		"Upgrade":
-			get_tree().get_root().get_node("Master").get_child(0).queue_free()
+			get_tree().get_root().get_node("Master").get_child(1).queue_free()
 			var level_tmp = UPGRADE_ROOM.instantiate()
 			self.call_deferred("add_child", level_tmp)
 	pass

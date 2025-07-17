@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cm3y52gm14lex"]
+[gd_scene load_steps=15 format=3 uid="uid://cm3y52gm14lex"]
 
 [ext_resource type="Texture2D" uid="uid://d20f8g4bmeyt5" path="res://art/entities/Cat.png" id="1_m8748"]
 [ext_resource type="Script" path="res://scenes/Blu/Blu_Manager.gd" id="2_dxrty"]
 [ext_resource type="FontFile" uid="uid://dhu6p0jpsi3w5" path="res://scenes/UI/retro-blocky.otf" id="3_gatvn"]
+[ext_resource type="AudioStream" uid="uid://bavggk7e882ig" path="res://scenes/Blu/kitty-meow-85182.mp3" id="4_4256q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_27c7k"]
 atlas = ExtResource("1_m8748")
@@ -19,6 +20,22 @@ region = Rect2(32, 16, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_r4rdg"]
 atlas = ExtResource("1_m8748")
 region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1o0j1"]
+atlas = ExtResource("1_m8748")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uov3m"]
+atlas = ExtResource("1_m8748")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qideu"]
+atlas = ExtResource("1_m8748")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdt6w"]
+atlas = ExtResource("1_m8748")
+region = Rect2(48, 32, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3u215"]
 animations = [{
@@ -38,6 +55,23 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1o0j1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uov3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qideu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdt6w")
+}],
+"loop": true,
+"name": &"idle_select",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mlwnc"]
@@ -48,7 +82,7 @@ script = ExtResource("2_dxrty")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3u215")
-animation = &"idle"
+animation = &"idle_select"
 
 [node name="interact_area" type="Area2D" parent="."]
 
@@ -58,14 +92,17 @@ shape = SubResource("CircleShape2D_mlwnc")
 
 [node name="speech" type="Label" parent="."]
 offset_left = -38.0
-offset_top = -56.0
-offset_right = 61.0
+offset_top = -83.0
+offset_right = 35.0
 offset_bottom = -7.0
 theme_override_fonts/font = ExtResource("3_gatvn")
 theme_override_font_sizes/font_size = 5
 horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 2
+
+[node name="meow_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_4256q")
 
 [connection signal="body_entered" from="interact_area" to="." method="_on_interact_area_body_entered"]
 [connection signal="body_exited" from="interact_area" to="." method="_on_interact_area_body_exited"]

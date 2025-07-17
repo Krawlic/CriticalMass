@@ -1,10 +1,13 @@
-[gd_scene load_steps=21 format=3 uid="uid://btg6o4ijr2866"]
+[gd_scene load_steps=26 format=3 uid="uid://btg6o4ijr2866"]
 
 [ext_resource type="Script" path="res://scenes/UpgradeRoom/upgrades/upgrade_base.gd" id="1_e0ox3"]
 [ext_resource type="Texture2D" uid="uid://ym84ma8b74cw" path="res://art/upgrades/stand.png" id="1_lj1a7"]
+[ext_resource type="Texture2D" uid="uid://cpfljibruk7q1" path="res://art/upgrades/stand_used.png" id="3_cfpc1"]
 [ext_resource type="FontFile" uid="uid://dhu6p0jpsi3w5" path="res://scenes/UI/retro-blocky.otf" id="3_kjbdl"]
 [ext_resource type="Texture2D" uid="uid://b1uk5vsktbto2" path="res://art/upgrades/interactButton_unselected.png" id="4_6lyka"]
+[ext_resource type="Texture2D" uid="uid://c64510f4s2dpu" path="res://art/upgrades/spark.png" id="4_dhofq"]
 [ext_resource type="Texture2D" uid="uid://xjbgle7hml6d" path="res://art/upgrades/interactButton.png" id="5_25xke"]
+[ext_resource type="AudioStream" uid="uid://5pjt04aejf5n" path="res://scenes/UpgradeRoom/power_up_grab-88510.mp3" id="8_4b16i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4repy"]
 atlas = ExtResource("1_lj1a7")
@@ -20,6 +23,22 @@ region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_htbcn"]
 atlas = ExtResource("1_lj1a7")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gy55m"]
+atlas = ExtResource("3_cfpc1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vsnb"]
+atlas = ExtResource("3_cfpc1")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_byesb"]
+atlas = ExtResource("3_cfpc1")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rna0f"]
+atlas = ExtResource("3_cfpc1")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_skt0b"]
@@ -40,13 +59,24 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gy55m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vsnb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_byesb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rna0f")
+}],
+"loop": false,
+"name": &"used",
+"speed": 2.0
 }]
-
-[sub_resource type="Gradient" id="Gradient_m8otg"]
-colors = PackedColorArray(0.235294, 0.368627, 0.545098, 1, 0.643137, 0.866667, 0.858824, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_rtw3q"]
-gradient = SubResource("Gradient_m8otg")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cqrrj"]
 particle_flag_disable_z = true
@@ -55,7 +85,6 @@ emission_box_extents = Vector3(4, 1, 1)
 direction = Vector3(0, 1, 0)
 initial_velocity_max = 22.48
 gravity = Vector3(0, 9.8, 0)
-color_ramp = SubResource("GradientTexture1D_rtw3q")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v8anj"]
 radius = 11.0114
@@ -112,10 +141,12 @@ animations = [{
 script = ExtResource("1_e0ox3")
 
 [node name="upgrade_terminal" type="AnimatedSprite2D" parent="."]
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_skt0b")
-frame_progress = 0.861626
+animation = &"used"
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="upgrade_terminal"]
+[node name="stand_particles" type="GPUParticles2D" parent="upgrade_terminal"]
+z_index = 1
 position = Vector2(0, -3)
 amount = 4
 process_material = SubResource("ParticleProcessMaterial_cqrrj")
@@ -128,33 +159,47 @@ position = Vector2(0, -4)
 position = Vector2(0, 6.5)
 shape = SubResource("CircleShape2D_v8anj")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="upgrade_particles" type="GPUParticles2D" parent="upgrade_terminal"]
+z_index = 1
+position = Vector2(0, -4)
+emitting = false
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_cqrrj")
+texture = ExtResource("4_dhofq")
+lifetime = 0.75
+
+[node name="particle_timer" type="Timer" parent="upgrade_terminal"]
+wait_time = 1.5
+one_shot = true
+
+[node name="Control" type="Node2D" parent="."]
 
 [node name="upgrade_icon" type="TextureRect" parent="Control"]
-layout_mode = 0
 offset_left = -8.0
 offset_top = -28.0
 offset_right = 8.0
 offset_bottom = -12.0
 
-[node name="upgrade_label" type="Control" parent="Control"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="Control/upgrade_label"]
-layout_mode = 0
+[node name="Label" type="Label" parent="Control"]
 offset_left = -32.0
-offset_top = -49.0
+offset_top = -51.0
 offset_right = 32.0
-offset_bottom = -31.0
+offset_bottom = -33.0
 theme_override_fonts/font = ExtResource("3_kjbdl")
 theme_override_font_sizes/font_size = 5
 text = "Upgrade  Template"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="cost_label" type="Label" parent="Control"]
+offset_left = -33.0
+offset_top = -72.0
+offset_right = 31.0
+offset_bottom = -54.0
+theme_override_fonts/font = ExtResource("3_kjbdl")
+theme_override_font_sizes/font_size = 5
+text = "Cost:  1"
 horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 2
@@ -164,5 +209,9 @@ position = Vector2(8, 2)
 sprite_frames = SubResource("SpriteFrames_pl6we")
 animation = &"not_selected"
 
+[node name="upgrade_particle_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_4b16i")
+
 [connection signal="body_entered" from="upgrade_terminal/hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="upgrade_terminal/hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="timeout" from="upgrade_terminal/particle_timer" to="." method="_on_particle_timer_timeout"]

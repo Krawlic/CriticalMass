@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://dwnfw2p5ooy11"]
+[gd_scene load_steps=27 format=3 uid="uid://dwnfw2p5ooy11"]
 
 [ext_resource type="Script" path="res://scenes/player/player_controller.gd" id="1_kfa2x"]
 [ext_resource type="Texture2D" uid="uid://k2agfa58cxx4" path="res://scenes/player/player.png" id="1_yxsi4"]
+[ext_resource type="AudioStream" uid="uid://ckbqfxlanno6k" path="res://scenes/player/teleport-90323.mp3" id="3_jng0m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gj43d"]
 atlas = ExtResource("1_yxsi4")
@@ -54,6 +55,18 @@ region = Rect2(32, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_t4kce"]
 atlas = ExtResource("1_yxsi4")
 region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ew4ah"]
+atlas = ExtResource("1_yxsi4")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnvju"]
+atlas = ExtResource("1_yxsi4")
+region = Rect2(16, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y848t"]
+atlas = ExtResource("1_yxsi4")
+region = Rect2(32, 64, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ptmk1"]
 atlas = ExtResource("1_yxsi4")
@@ -124,6 +137,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ew4ah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnvju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y848t")
+}],
+"loop": false,
+"name": &"slide",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ptmk1")
 }, {
 "duration": 1.0,
@@ -144,6 +171,9 @@ animations = [{
 radius = 3.0
 height = 12.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxuqa"]
+size = Vector2(7, 4)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_kfa2x")
 jump_velocity = -250.0
@@ -151,12 +181,20 @@ jump_velocity = -250.0
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_fkvmo")
-animation = &"walk"
+animation = &"slide"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="normal_hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_md2a2")
 
+[node name="slide_hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 6)
+shape = SubResource("RectangleShape2D_kxuqa")
+disabled = true
+
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
+
+[node name="teleport_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jng0m")
 
 [connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]

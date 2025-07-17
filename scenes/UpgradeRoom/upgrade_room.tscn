@@ -1,13 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://bcwbspme4byro"]
+[gd_scene load_steps=22 format=3 uid="uid://bcwbspme4byro"]
 
 [ext_resource type="Script" path="res://scenes/UpgradeRoom/upgrade_room.gd" id="1_a3lrw"]
 [ext_resource type="Texture2D" uid="uid://bb3q5e3uikyjl" path="res://art/tilesets/lab.png" id="1_lx40s"]
 [ext_resource type="PackedScene" uid="uid://dwnfw2p5ooy11" path="res://scenes/player/player.tscn" id="2_70sh8"]
 [ext_resource type="PackedScene" uid="uid://c4g83emtpe0pw" path="res://scenes/scoreboard/score_board.tscn" id="4_f65b4"]
-[ext_resource type="PackedScene" uid="uid://bvqb2aelbonno" path="res://scenes/UpgradeRoom/upgrades/coyote_time.tscn" id="6_jmuvu"]
-[ext_resource type="PackedScene" uid="uid://wnpknfjlatbd" path="res://scenes/UpgradeRoom/upgrades/double_jump.tscn" id="7_mdr8g"]
 [ext_resource type="PackedScene" uid="uid://3ikj3kq62mmv" path="res://scenes/UpgradeRoom/exit_node.tscn" id="7_thdk2"]
 [ext_resource type="AudioStream" uid="uid://c47sqput3jjme" path="res://scenes/UpgradeRoom/the-inbetween.mp3" id="8_3cu4y"]
+[ext_resource type="PackedScene" uid="uid://cojfb3limlbrt" path="res://scenes/UpgradeRoom/upgrades/distance_monitor.tscn" id="8_5xsjm"]
+[ext_resource type="Texture2D" uid="uid://d05hxsi34uclx" path="res://art/UI/exit_sign.png" id="9_k7xa6"]
 [ext_resource type="PackedScene" uid="uid://cm3y52gm14lex" path="res://scenes/Blu/blu.tscn" id="9_usq3g"]
 
 [sub_resource type="Gradient" id="Gradient_t2u7o"]
@@ -107,6 +107,28 @@ scale_max = 2.0
 scale_curve = SubResource("CurveTexture_y5sfh")
 alpha_curve = SubResource("CurveTexture_x0aoq")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4cmhi"]
+atlas = ExtResource("9_k7xa6")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lywmw"]
+atlas = ExtResource("9_k7xa6")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4hwyr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4cmhi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lywmw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
 [node name="upgrade_room" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_a3lrw")
 player = NodePath("Player")
@@ -120,6 +142,7 @@ offset_bottom = 605.0
 texture = SubResource("GradientTexture1D_51i4j")
 
 [node name="TileMap" type="TileMap" parent="."]
+z_as_relative = false
 tile_set = SubResource("TileSet_8xqu6")
 format = 2
 layer_0/name = "background"
@@ -129,6 +152,7 @@ layer_1/name = "foreground"
 layer_1/z_index = -1
 layer_1/tile_data = PackedInt32Array()
 layer_2/name = "ground"
+layer_2/z_index = 2
 layer_2/tile_data = PackedInt32Array(589824, 458752, 3, 589825, 0, 0, 589826, 0, 0, 589827, 131072, 0, 589828, 131072, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 131072, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 131072, 0, 589837, 65536, 0, 589838, 0, 0, 589839, 0, 0, 589840, 0, 0, 589841, 0, 0, 589842, 0, 0, 589843, 458752, 268435459, 524288, 458752, 0, 458752, 458752, 0, 393216, 458752, 1, 327680, 458752, 0, 262144, 458752, 0, 196608, 458752, 0, 131072, 458752, 0, 65536, 458752, 2, 0, 393216, 0, 524307, 458752, 268435458, 458771, 458752, 268435456, 393235, 458752, 268435457, 327699, 458752, 268435456, 262163, 458752, 268435456, 196627, 458752, 268435456, 131091, 458752, 268435458, 65555, 458752, 268435456, 19, 393216, 268435456, 1, 0, 1, 2, 131072, 1, 3, 0, 1, 4, 0, 1, 5, 65536, 1, 6, 0, 1, 7, 65536, 1, 8, 0, 1, 9, 131072, 1, 10, 0, 1, 11, 0, 1, 12, 65536, 1, 13, 0, 1, 14, 131072, 1, 15, 0, 1, 16, 0, 1, 17, 0, 1, 18, 0, 1)
 
 [node name="Player" parent="." instance=ExtResource("2_70sh8")]
@@ -138,6 +162,7 @@ position = Vector2(27, 134)
 position = Vector2(100, 74)
 
 [node name="ScoreBoard" parent="Camera2D" instance=ExtResource("4_f65b4")]
+z_index = 3
 
 [node name="voidparticles" type="GPUParticles2D" parent="."]
 z_index = -3
@@ -146,14 +171,8 @@ amount = 128
 process_material = SubResource("ParticleProcessMaterial_3sxrm")
 lifetime = 2.0
 
-[node name="coyote_time" parent="." instance=ExtResource("6_jmuvu")]
-position = Vector2(189, 136)
-
 [node name="exit_node" parent="." instance=ExtResource("7_thdk2")]
-position = Vector2(284, 135)
-
-[node name="upgrade_base" parent="." instance=ExtResource("7_mdr8g")]
-position = Vector2(127, 136)
+position = Vector2(284, 127)
 
 [node name="bgmusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_3cu4y")
@@ -161,3 +180,22 @@ autoplay = true
 
 [node name="Blu" parent="." instance=ExtResource("9_usq3g")]
 position = Vector2(57, 136)
+
+[node name="Upgrade_Slots" type="Node2D" parent="."]
+
+[node name="Slot1" type="Node2D" parent="Upgrade_Slots"]
+position = Vector2(117, 136)
+
+[node name="Slot2" type="Node2D" parent="Upgrade_Slots"]
+position = Vector2(179, 136)
+
+[node name="Slot3" type="Node2D" parent="Upgrade_Slots"]
+position = Vector2(234, 136)
+
+[node name="distance_monitor" parent="." instance=ExtResource("8_5xsjm")]
+position = Vector2(56, 14)
+
+[node name="exitsign" type="AnimatedSprite2D" parent="."]
+position = Vector2(284, 103)
+sprite_frames = SubResource("SpriteFrames_4hwyr")
+frame_progress = 0.982348

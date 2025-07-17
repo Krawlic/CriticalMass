@@ -2,16 +2,31 @@ extends Node2D
 
 @export var player: CharacterBody2D
 
+var upgrade_scenes: Array[PackedScene] = [preload("res://scenes/UpgradeRoom/upgrades/coyote_time.tscn"),
+	preload("res://scenes/UpgradeRoom/upgrades/double_jump.tscn"),
+	preload("res://scenes/UpgradeRoom/upgrades/slide.tscn"),
+	preload("res://scenes/UpgradeRoom/upgrades/speed_up.tscn"),
+	preload("res://scenes/UpgradeRoom/upgrades/blackhole_speed_down.tscn")
+]
+
 @onready var camera = $Camera2D
 @onready var bgmusic = $bgmusic
+@onready var upgrade_slots = $Upgrade_Slots
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	SignalBus.update_score.emit()
 	bgmusic.stream.loop = true
 	print(Global.max_distance)
+	spawn_upgrades()
 
 func _process(delta):
 	var camera_x = player.global_position.x
 	camera.global_position.x = camera_x
-	pass
+
+func spawn_upgrades():
+	randomize()
+	for slot in upgrade_slots.get_children():
+		var scene = upgrade_scenes[randi() % upgrade_scenes.size()]
+		upgrade_scenes.erase(scene)
+		var upgrade_instance = scene.instantiate()
+		slot.add_child(upgrade_instance)
