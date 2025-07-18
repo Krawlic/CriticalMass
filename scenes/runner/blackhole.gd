@@ -4,6 +4,7 @@ extends Node2D
 @export var acceleration: float = .05
 @export var player: CharacterBody2D
 @export var audio: AudioStreamPlayer
+@export var shader: ColorRect
 
 @onready var end_point = $duckbox/end_point
 @onready var start_point = $duckbox/start_point
@@ -22,6 +23,7 @@ func _process(delta):
 	if player_in_duckbox:
 		var percent = get_percent_between_x(player.global_position.x)
 		player.global_position.x += -1 * percent
+		shader.material.set_shader_parameter("intensity", percent)
 		var volume_factor = 1.0 - percent
 		audio.volume_db = linear_to_db(volume_factor)
 

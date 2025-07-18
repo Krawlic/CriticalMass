@@ -10,5 +10,6 @@ region = Rect2(0, 16, 16, 16)
 
 [node name="slide" instance=ExtResource("1_gjkfd")]
 script = ExtResource("2_i5syf")
+cost = 10
 description = "Crouch Slide"
 icon = SubResource("AtlasTexture_e0ma7")

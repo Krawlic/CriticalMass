@@ -10,5 +10,6 @@ region = Rect2(48, 16, 16, 16)
 
 [node name="Blackhole_speed_down" instance=ExtResource("1_r2uas")]
 script = ExtResource("2_mwste")
+cost = 5
 description = "Black-hole Accel. -5%/second"
 icon = SubResource("AtlasTexture_1piyo")
