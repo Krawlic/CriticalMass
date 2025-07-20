@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://dtslb43454un3"]
+
+[ext_resource type="FontFile" uid="uid://dh37cwxr1ahyp" path="res://art/Awesome 9.ttf" id="1_d44cq"]
+[ext_resource type="Script" path="res://scenes/Options/ActionBindSet.gd" id="1_qc1ru"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bakkr"]
+bg_color = Color(0.351563, 0.351563, 0.351563, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o17ll"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cm3ym"]
+bg_color = Color(0.273873, 0.273873, 0.273873, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w63pm"]
+bg_color = Color(0.352941, 0.352941, 0.352941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bq6dk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3cbku"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 1)
+
+[node name="ActionBindSet_Row" type="MarginContainer"]
+offset_right = 236.0
+offset_bottom = 16.0
+script = ExtResource("1_qc1ru")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Action Name" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_d44cq")
+theme_override_font_sizes/font_size = 16
+text = "Action Name"
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BindButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_d44cq")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_bakkr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_o17ll")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cm3ym")
+text = "Space"
+
+[node name="Control2" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="BindButton_controller" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 1
+theme_override_fonts/font = ExtResource("1_d44cq")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_w63pm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bq6dk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3cbku")
+text = "0"
+
+[node name="no_change" type="TextureRect" parent="HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 16)
+layout_mode = 2

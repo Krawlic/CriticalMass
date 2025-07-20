@@ -8,7 +8,7 @@ var is_overlapping: bool = false
 func _ready():
 	sprite.play("not-selected")
 
-func _process(delta):
+func _process(_delta):
 	if is_overlapping:
 		sprite.play("selected")
 		if Input.is_action_just_pressed("interact"):

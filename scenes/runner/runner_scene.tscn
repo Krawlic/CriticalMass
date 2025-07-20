@@ -1,32 +1,48 @@
-[gd_scene load_steps=12 format=3 uid="uid://ciuijrmcw8auu"]
+[gd_scene load_steps=20 format=3 uid="uid://ciuijrmcw8auu"]
 
 [ext_resource type="Script" path="res://scenes/runner/chunk_controller.gd" id="1_qrxfx"]
+[ext_resource type="PackedScene" uid="uid://c4n12qn1hkohl" path="res://scenes/Chunks/chunk_7.tscn" id="2_1cu16"]
 [ext_resource type="PackedScene" uid="uid://drl1cosuclgml" path="res://scenes/Chunks/chunk_1.tscn" id="2_n5fk7"]
 [ext_resource type="PackedScene" uid="uid://dwnfw2p5ooy11" path="res://scenes/player/player.tscn" id="2_n06xk"]
 [ext_resource type="PackedScene" uid="uid://bqf25f2sg6485" path="res://scenes/Chunks/chunk_4.tscn" id="3_35opf"]
+[ext_resource type="PackedScene" uid="uid://o8c0kaj6flma" path="res://scenes/Chunks/chunk_6.tscn" id="3_c4tik"]
 [ext_resource type="PackedScene" uid="uid://cbmhrbf0e0fbb" path="res://scenes/Chunks/chunk_3.tscn" id="4_g7fb5"]
 [ext_resource type="PackedScene" uid="uid://cjqwk50p47cqf" path="res://scenes/Blackhole/blackhole.tscn" id="5_gv8e4"]
+[ext_resource type="PackedScene" uid="uid://cwbfaqc65nsnu" path="res://scenes/Chunks/chunk_2.tscn" id="5_gvqon"]
+[ext_resource type="PackedScene" uid="uid://cp68h8vma1w1n" path="res://scenes/Chunks/chunk_5.tscn" id="6_3qlgj"]
 [ext_resource type="PackedScene" uid="uid://c4g83emtpe0pw" path="res://scenes/scoreboard/score_board.tscn" id="7_jme18"]
 [ext_resource type="AudioStream" uid="uid://bje1384g5amux" path="res://scenes/runner/FleeTrumpet.mp3" id="8_pselr"]
 [ext_resource type="Texture2D" uid="uid://b8uut5wtpgrq" path="res://art/paralax/paralax_layer1.png" id="10_cw577"]
 [ext_resource type="Texture2D" uid="uid://brtplix32xwb7" path="res://art/paralax/paralax_layer2.png" id="10_u24ij"]
 [ext_resource type="Texture2D" uid="uid://cf2w0125if4mi" path="res://art/paralax/paralax_layer3.png" id="11_rgi3w"]
+[ext_resource type="Shader" path="res://scenes/Blackhole/BlackholeFX.gdshader" id="12_6otq7"]
+[ext_resource type="PackedScene" uid="uid://rkh0bxov78kn" path="res://scenes/UI/RepulserCharges/Repluser Charges.tscn" id="16_ybkmm"]
+[ext_resource type="PackedScene" uid="uid://bc860nd1eam74" path="res://scenes/Pause/pause_menu.tscn" id="17_2ogx8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6etvg"]
+shader = ExtResource("12_6otq7")
+shader_parameter/intensity = 0.0
+shader_parameter/screen_size = null
 
 [node name="RunnerScene" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_qrxfx")
-chunk_scenes = Array[PackedScene]([ExtResource("2_n5fk7"), ExtResource("4_g7fb5"), ExtResource("3_35opf")])
+first_chunk_scenes = Array[PackedScene]([ExtResource("2_1cu16"), ExtResource("3_c4tik")])
+chunk_scenes = Array[PackedScene]([ExtResource("2_n5fk7"), ExtResource("4_g7fb5"), ExtResource("3_35opf"), ExtResource("5_gvqon"), ExtResource("6_3qlgj")])
 
-[node name="blackhole" parent="." node_paths=PackedStringArray("player", "audio") instance=ExtResource("5_gv8e4")]
+[node name="blackhole" parent="." node_paths=PackedStringArray("player", "audio", "shader") instance=ExtResource("5_gv8e4")]
 player = NodePath("../Player")
 audio = NodePath("../AudioStreamPlayer")
+shader = NodePath("../Camera2D/Shader/BlackholeFX")
 
 [node name="Player" parent="." instance=ExtResource("2_n06xk")]
-position = Vector2(112, 132)
+position = Vector2(166, 135)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(160, 90)
 
 [node name="ScoreBoard" parent="Camera2D" instance=ExtResource("7_jme18")]
+z_index = 2
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Camera2D"]
 
@@ -54,7 +70,46 @@ motion_mirroring = Vector2(640, 0)
 position = Vector2(145, 89)
 texture = ExtResource("10_cw577")
 
+[node name="Shader" type="Control" parent="Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -160.0
+offset_top = -90.0
+offset_right = -120.0
+offset_bottom = -50.0
+
+[node name="BlackholeFX" type="ColorRect" parent="Camera2D/Shader"]
+material = SubResource("ShaderMaterial_6etvg")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 283.0
+offset_bottom = 141.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Repulser_Charges" parent="Camera2D" instance=ExtResource("16_ybkmm")]
+z_index = 3
+offset_left = -152.0
+offset_top = -81.0
+offset_right = -152.0
+offset_bottom = -81.0
+scale = Vector2(2, 2)
+
+[node name="background_fog" type="ColorRect" parent="Camera2D"]
+z_index = -5
+offset_left = -169.0
+offset_top = -96.0
+offset_right = 207.0
+offset_bottom = 91.0
+color = Color(0.136826, 0.136826, 0.136826, 0.54902)
+
+[node name="Pause Menu" parent="Camera2D" instance=ExtResource("17_2ogx8")]
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("8_pselr")
 volume_db = -3.0
 autoplay = true

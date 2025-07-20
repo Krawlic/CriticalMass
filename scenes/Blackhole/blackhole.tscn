@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://cjqwk50p47cqf"]
 
 [ext_resource type="Texture2D" uid="uid://b07ii4qfi0p77" path="res://art/entities/blackhole.png" id="1_4teui"]
-[ext_resource type="Script" path="res://scenes/runner/blackhole.gd" id="2_m1if1"]
+[ext_resource type="Script" path="res://scenes/Blackhole/blackhole.gd" id="2_myv6w"]
 [ext_resource type="AudioStream" uid="uid://dj7nm7be7oxbq" path="res://scenes/Blackhole/drone-slow-surging-growling-background-368755.mp3" id="3_eoahr"]
 [ext_resource type="AudioStream" uid="uid://cxc0bapawl44c" path="res://scenes/Blackhole/portal_idle-34022.mp3" id="4_xhc06"]
 [ext_resource type="AudioStream" uid="uid://bdcwio7r3f2k8" path="res://scenes/Blackhole/inswijm-isolated-then-stretched-23711.mp3" id="5_n70qj"]
@@ -62,7 +62,7 @@ z_index = 2
 position = Vector2(-98, 180)
 scale = Vector2(5.0625, 1)
 sprite_frames = SubResource("SpriteFrames_n4sjo")
-script = ExtResource("2_m1if1")
+script = ExtResource("2_myv6w")
 
 [node name="voidparticles" type="GPUParticles2D" parent="."]
 position = Vector2(119.704, 99)

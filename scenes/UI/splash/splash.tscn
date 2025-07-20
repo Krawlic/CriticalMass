@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dek7spvar7qb4"]
+
+[ext_resource type="Texture2D" uid="uid://bki0xqty8b30y" path="res://art/UI/KrawlicGamesSplash.png" id="1_juts1"]
+[ext_resource type="Script" path="res://scenes/UI/splash/splash.gd" id="1_qxotc"]
+
+[node name="Splash" type="Node2D"]
+script = ExtResource("1_qxotc")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_juts1")
+
+[node name="splash_timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="splash_timer" to="." method="_on_splash_timer_timeout"]
