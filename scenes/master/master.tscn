@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dyflmw2vqgn78" path="res://scenes/Transition/transition.tscn" id="2_d5ixf"]
 
 [node name="Master" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_sqm87")
 
 [node name="transition" parent="." instance=ExtResource("2_d5ixf")]

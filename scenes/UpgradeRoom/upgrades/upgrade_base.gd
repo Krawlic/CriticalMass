@@ -24,7 +24,7 @@ func _ready():
 	label.text = description
 	cost_label.text = "Cost:  " + str(cost)
 
-func _process(delta):
+func _process(_delta):
 	if is_overlapping and !is_bought:
 		label.visible = true
 		stand_particles.emitting = true

@@ -1,9 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://bcwbspme4byro"]
+[gd_scene load_steps=24 format=3 uid="uid://bcwbspme4byro"]
 
 [ext_resource type="Script" path="res://scenes/UpgradeRoom/upgrade_room.gd" id="1_a3lrw"]
 [ext_resource type="Texture2D" uid="uid://bb3q5e3uikyjl" path="res://art/tilesets/lab.png" id="1_lx40s"]
 [ext_resource type="PackedScene" uid="uid://dwnfw2p5ooy11" path="res://scenes/player/player.tscn" id="2_70sh8"]
 [ext_resource type="PackedScene" uid="uid://c4g83emtpe0pw" path="res://scenes/scoreboard/score_board.tscn" id="4_f65b4"]
+[ext_resource type="PackedScene" uid="uid://rkh0bxov78kn" path="res://scenes/UI/RepulserCharges/Repluser Charges.tscn" id="5_t0e6k"]
+[ext_resource type="PackedScene" uid="uid://bc860nd1eam74" path="res://scenes/Pause/pause_menu.tscn" id="6_g5mi2"]
 [ext_resource type="PackedScene" uid="uid://3ikj3kq62mmv" path="res://scenes/UpgradeRoom/exit_node.tscn" id="7_thdk2"]
 [ext_resource type="AudioStream" uid="uid://c47sqput3jjme" path="res://scenes/UpgradeRoom/the-inbetween.mp3" id="8_3cu4y"]
 [ext_resource type="PackedScene" uid="uid://cojfb3limlbrt" path="res://scenes/UpgradeRoom/upgrades/distance_monitor.tscn" id="8_5xsjm"]
@@ -83,14 +85,14 @@ sources/0 = SubResource("TileSetAtlasSource_5tocj")
 _data = [Vector2(0.0733333, 0), 0.0, 0.0, 0, 0, Vector2(0.76, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_x0aoq"]
+[sub_resource type="CurveTexture" id="CurveTexture_isyii"]
 curve = SubResource("Curve_00c71")
 
 [sub_resource type="Curve" id="Curve_ek3pv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_y5sfh"]
+[sub_resource type="CurveTexture" id="CurveTexture_at2ju"]
 curve = SubResource("Curve_ek3pv")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3sxrm"]
@@ -104,8 +106,8 @@ damping_min = 80.899
 damping_max = 80.899
 scale_min = 0.5
 scale_max = 2.0
-scale_curve = SubResource("CurveTexture_y5sfh")
-alpha_curve = SubResource("CurveTexture_x0aoq")
+scale_curve = SubResource("CurveTexture_at2ju")
+alpha_curve = SubResource("CurveTexture_isyii")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4cmhi"]
 atlas = ExtResource("9_k7xa6")
@@ -130,6 +132,7 @@ animations = [{
 }]
 
 [node name="upgrade_room" type="Node2D" node_paths=PackedStringArray("player")]
+process_mode = 1
 script = ExtResource("1_a3lrw")
 player = NodePath("Player")
 
@@ -164,6 +167,16 @@ position = Vector2(100, 74)
 [node name="ScoreBoard" parent="Camera2D" instance=ExtResource("4_f65b4")]
 z_index = 3
 
+[node name="Repulser_Charges" parent="Camera2D" instance=ExtResource("5_t0e6k")]
+z_index = 2
+offset_left = -156.0
+offset_top = -85.0
+offset_right = -156.0
+offset_bottom = -85.0
+scale = Vector2(2, 2)
+
+[node name="Pause Menu" parent="Camera2D" instance=ExtResource("6_g5mi2")]
+
 [node name="voidparticles" type="GPUParticles2D" parent="."]
 z_index = -3
 position = Vector2(162, 83)
@@ -175,6 +188,7 @@ lifetime = 2.0
 position = Vector2(284, 127)
 
 [node name="bgmusic" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("8_3cu4y")
 autoplay = true
 

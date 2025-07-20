@@ -13,6 +13,7 @@ var curr_speed: float
 var player_in_duckbox: bool = false
 
 func _ready():
+	SignalBus.repulse_blackhole.connect(_repulse_blackhole)
 	curr_speed = start_speed
 	acceleration = Global.blackhole_acceleration
 
@@ -23,7 +24,10 @@ func _process(delta):
 	if player_in_duckbox:
 		var percent = get_percent_between_x(player.global_position.x)
 		player.global_position.x += -1 * percent
-		shader.material.set_shader_parameter("intensity", percent)
+		if Global.enable_CA == true:
+			shader.material.set_shader_parameter("intensity", percent)
+		else:
+			shader.material.set_shader_parameter("intensity", 0)
 		var volume_factor = 1.0 - percent
 		audio.volume_db = linear_to_db(volume_factor)
 
@@ -48,4 +52,5 @@ func _on_hitbox_body_entered(body):
 		curr_speed = 0
 		acceleration = 0
 
-
+func _repulse_blackhole():
+	global_position.x -= 500

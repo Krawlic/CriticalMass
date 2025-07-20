@@ -9,6 +9,7 @@ extends Node2D
 @onready var player = $Player
 @onready var camera = $Camera2D
 @onready var blackhole = $blackhole
+@onready var blackhole_fx = $Camera2D/Shader/BlackholeFX
 @onready var music = $AudioStreamPlayer
 @onready var start_dist_node = $Start_dist_node
 
@@ -24,7 +25,7 @@ func _ready():
 	
 	spawn_first_chunks(last_chunk_x)
 
-func _process(delta):
+func _process(_delta):
 	var camera_x = player.global_position.x
 	camera.global_position.x = camera_x
 	
@@ -41,7 +42,7 @@ func spawn_chunk(x_pos):
 	add_child(chunk)
 	curr_chunks.append(chunk)
 
-func spawn_first_chunks(x_pos):
+func spawn_first_chunks(_x_pos):
 	var scene = first_chunk_scenes[0]
 	for i in num_start_chunks:
 		if i == num_start_chunks-1:

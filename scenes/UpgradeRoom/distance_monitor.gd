@@ -8,7 +8,7 @@ func _ready():
 	switch_monitor.start()
 	max_distance_label.text = str(Global.max_distance) + "m"
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _on_switch_monitor_timeout():

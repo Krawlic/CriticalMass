@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dyflmw2vqgn78"]
 
-[ext_resource type="Script" path="res://transition.gd" id="1_rddke"]
+[ext_resource type="Script" path="res://scenes/Transition/transition.gd" id="1_rddke"]
 
 [sub_resource type="Animation" id="Animation_ijopt"]
 resource_name = "fade_out"

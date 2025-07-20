@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://x4xrliwjx56s"]
 
 [ext_resource type="PackedScene" uid="uid://btg6o4ijr2866" path="res://scenes/UpgradeRoom/upgrades/upgrade_base.tscn" id="1_r2uas"]
-[ext_resource type="Script" path="res://Blackhole_speed_down.gd" id="2_mwste"]
+[ext_resource type="Script" path="res://scenes/UpgradeRoom/upgrades/Blackhole_speed_down.gd" id="2_mwste"]
 [ext_resource type="Texture2D" uid="uid://barvim1vkpgxk" path="res://art/upgrades/upgrade_icon_atlas.png" id="3_8e0kh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1piyo"]
