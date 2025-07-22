@@ -37,7 +37,7 @@ func _ready():
 	funfacts_array.append("Meow... I mean Hello there!")
 	funfacts_array.append("")
 
-func _process(delta):
+func _process(_delta):
 	if !is_overlapping:
 		speech.text = ""
 	

@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const REPULSER_BOMB = preload("res://scenes/pickups/repulser_bomb/repulser_bomb.tscn")
+
 @export var speed : float = 150.0
 @export var jump_velocity: float = -175.0
 @export var jump_buffer_time: float = 0.15
@@ -25,6 +27,7 @@ var coyote_timer: float = 0.0
 var is_sliding: bool = false
 var slide_timer: float = 0.0
 var slide_velocity_x: float = 0.0
+var curr_repulser_charges = 0
 
 func _ready():
 	SignalBus.player_escape.connect(_player_escape)
@@ -85,6 +88,13 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("crouch") and is_on_floor() and not is_sliding and PlayerManager.has_slide:
 			start_slide()
 		
+		if Input.is_action_just_pressed("repulser") and curr_repulser_charges > 0:
+			curr_repulser_charges -= 1
+			SignalBus.update_repulser_label.emit(curr_repulser_charges)
+			var bomb = REPULSER_BOMB.instantiate()
+			get_parent().add_child(bomb)
+			bomb.global_position = global_position
+			
 		move_and_slide()
 		update_animation()
 
@@ -148,3 +158,4 @@ func _update_player_flags():
 	coyote_time = PlayerManager.coyote_time
 	max_jumps = PlayerManager.max_jumps
 	speed = PlayerManager.speed
+	curr_repulser_charges = PlayerManager.max_repulsers

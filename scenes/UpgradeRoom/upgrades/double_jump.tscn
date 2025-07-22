@@ -10,4 +10,5 @@ region = Rect2(0, 0, 16, 16)
 
 [node name="double_jump" instance=ExtResource("1_wsh0t")]
 script = ExtResource("2_7swa3")
+cost = 20
 icon = SubResource("AtlasTexture_4ldwv")

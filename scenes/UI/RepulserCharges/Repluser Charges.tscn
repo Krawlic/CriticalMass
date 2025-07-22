@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://rkh0bxov78kn"]
+
+[ext_resource type="Script" path="res://scenes/UI/RepulserCharges/Repluser Charges.gd" id="1_e70r3"]
+[ext_resource type="Texture2D" uid="uid://bi1nn3cyyg3d4" path="res://art/entities/repulser.png" id="2_y5rfc"]
+[ext_resource type="FontFile" uid="uid://dhu6p0jpsi3w5" path="res://scenes/UI/retro-blocky.otf" id="3_siqif"]
+
+[node name="Repulser_Charges" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e70r3")
+
+[node name="repulser" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = ExtResource("2_y5rfc")
+
+[node name="charges" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 48.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_siqif")
+theme_override_font_sizes/font_size = 5
+text = "x1"

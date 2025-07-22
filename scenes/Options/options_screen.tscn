@@ -1,0 +1,104 @@
+[gd_scene load_steps=9 format=3 uid="uid://bpugmbxjrfcqq"]
+
+[ext_resource type="Script" path="res://scenes/Options/options_screen.gd" id="1_gj7n8"]
+[ext_resource type="FontFile" uid="uid://dh37cwxr1ahyp" path="res://art/Awesome 9.ttf" id="2_t1nkg"]
+[ext_resource type="Texture2D" uid="uid://c7li1nstti6qf" path="res://art/UI/Backbutton2.png" id="3_omv6c"]
+[ext_resource type="Script" path="res://scenes/Options/InputBinds.gd" id="3_sqjfa"]
+[ext_resource type="Texture2D" uid="uid://dnuosfdkid7vd" path="res://art/UI/Backbutton3.png" id="4_d24sx"]
+[ext_resource type="Texture2D" uid="uid://og0dvspe8ea" path="res://art/UI/Backbutton1.png" id="5_8kmt5"]
+
+[sub_resource type="Gradient" id="Gradient_mp3gf"]
+colors = PackedColorArray(1.73271e-06, 0.516141, 0.727654, 1, 0, 0.52762, 0.644471, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_amlsy"]
+gradient = SubResource("Gradient_mp3gf")
+
+[node name="Options_Screen" type="Node2D"]
+visible = false
+script = ExtResource("1_gj7n8")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+texture = SubResource("GradientTexture1D_amlsy")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 321.0
+offset_bottom = 40.0
+
+[node name="VScrollBar" type="ScrollContainer" parent="Control"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 5.0
+offset_right = 312.0
+offset_bottom = 142.0
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/VScrollBar"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VScrollBar/VBoxContainer"]
+layout_mode = 2
+
+[node name="volume_label" type="Label" parent="Control/VScrollBar/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_t1nkg")
+theme_override_font_sizes/font_size = 16
+text = "Volume:"
+
+[node name="volume_slider" type="HSlider" parent="Control/VScrollBar/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_top = NodePath("../../../../back_button")
+focus_neighbor_bottom = NodePath("../../HBoxContainer2/ChromaAberration_Toggle")
+min_value = -41.0
+max_value = 1.0
+value = 1.0
+scrollable = false
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VScrollBar/VBoxContainer"]
+layout_mode = 2
+
+[node name="ChromaAberration_Label" type="Label" parent="Control/VScrollBar/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_t1nkg")
+theme_override_font_sizes/font_size = 16
+text = "Chromatic Aberration: "
+
+[node name="ChromaAberration_Toggle" type="CheckButton" parent="Control/VScrollBar/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../HBoxContainer/volume_slider")
+button_pressed = true
+
+[node name="InputBinds_label" type="Label" parent="Control/VScrollBar/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_t1nkg")
+theme_override_font_sizes/font_size = 16
+text = "Input Binds:        KB/Gamepad"
+
+[node name="InputBinds" type="VBoxContainer" parent="Control/VScrollBar/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../HBoxContainer2/ChromaAberration_Toggle")
+focus_neighbor_bottom = NodePath("../../../back_button")
+script = ExtResource("3_sqjfa")
+
+[node name="back_button" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 146.0
+offset_right = 34.0
+offset_bottom = 162.0
+scale = Vector2(2, 2)
+focus_neighbor_top = NodePath("../VScrollBar/VBoxContainer/HBoxContainer2/ChromaAberration_Toggle")
+focus_neighbor_bottom = NodePath("../VScrollBar/VBoxContainer/HBoxContainer/volume_slider")
+texture_normal = ExtResource("3_omv6c")
+texture_pressed = ExtResource("4_d24sx")
+texture_hover = ExtResource("5_8kmt5")
+texture_focused = ExtResource("5_8kmt5")
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="value_changed" from="Control/VScrollBar/VBoxContainer/HBoxContainer/volume_slider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="toggled" from="Control/VScrollBar/VBoxContainer/HBoxContainer2/ChromaAberration_Toggle" to="." method="_on_chroma_aberration_toggle_toggled"]
+[connection signal="button_down" from="Control/back_button" to="." method="_on_back_button_button_down"]
