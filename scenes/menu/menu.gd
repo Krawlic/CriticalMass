@@ -20,6 +20,7 @@ func regrab_focus():
 	start_button.grab_focus()
 
 func _on_start_button_button_down():
+	start_button.disabled = true
 	SignalBus.fade_to_scene.emit("Runner")
 
 func _on_options_button_button_down():
