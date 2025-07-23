@@ -7,7 +7,7 @@ var has_rewind: bool = false
 var has_jump_acceleration: bool = false
 var has_run_momentum: bool = true
 var has_slide: bool = false
-var max_repulsers = 5
+var max_repulsers = 0
 
 var has_visited_TIBIA = false
 
