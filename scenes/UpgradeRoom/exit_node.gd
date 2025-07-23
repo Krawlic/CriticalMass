@@ -4,6 +4,7 @@ extends Node2D
 @onready var exit_sfx = $exit_sfx
 
 var is_overlapping: bool = false
+var is_disabled = false
 
 func _ready():
 	sprite.play("not-selected")
@@ -11,7 +12,8 @@ func _ready():
 func _process(_delta):
 	if is_overlapping:
 		sprite.play("selected")
-		if Input.is_action_just_pressed("interact"):
+		if Input.is_action_just_pressed("interact") and !is_disabled:
+			is_disabled = true
 			exit_sfx.play()
 			SignalBus.fade_to_scene.emit("Runner")
 	else:

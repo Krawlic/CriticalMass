@@ -422,6 +422,7 @@ position = Vector2(273, 147)
 sprite_frames = SubResource("SpriteFrames_meux7")
 
 [node name="GWJ83" type="TextureRect" parent="."]
+visible = false
 offset_left = 267.0
 offset_top = 13.0
 offset_right = 307.0
